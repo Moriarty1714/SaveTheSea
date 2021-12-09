@@ -1,0 +1,2 @@
+Texto: #131313
+Fondo: #FF770E
