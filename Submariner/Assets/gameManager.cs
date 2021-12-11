@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class gameManager : MonoBehaviour
 {
@@ -40,4 +42,6 @@ public class gameManager : MonoBehaviour
             timeSpawn -= 0.01f;
         }
     }
+
+    
 }

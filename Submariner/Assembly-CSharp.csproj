@@ -58,8 +58,11 @@
   <ItemGroup>
     <Compile Include="Assets\gameManager.cs" />
     <Compile Include="Assets\Scripts\stuffMovement.cs" />
-    <Compile Include="Assets\Scripts\buzoMov.cs" />
     <Compile Include="Assets\Scripts\MenúManager.cs" />
+    <Compile Include="Assets\Scripts\buzoMov.cs" />
+    <Compile Include="Assets\Scripts\Quiz\Questions.cs" />
+    <Compile Include="Assets\Scripts\Quiz\answerManager.cs" />
+    <Compile Include="Assets\Scripts\Quiz\quizManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
