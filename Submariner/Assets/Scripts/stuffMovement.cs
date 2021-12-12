@@ -15,7 +15,7 @@ public class stuffMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x-velocity, transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x-(velocity*Time.deltaTime), transform.position.y, transform.position.z);
         transform.Rotate(new Vector3(0, 0, 1), rotation);
 
         if (transform.position.x < -10) 

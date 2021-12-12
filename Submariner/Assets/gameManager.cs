@@ -14,16 +14,21 @@ public class gameManager : MonoBehaviour
     public GameObject nature;
     public List<Sprite> natureImg;
     public List<Sprite> trashImg;
+    public buzoMov buzo;
+
+    public GameObject quiz;
+    bool quizDone;
 
     void Start()
     {
         lastSpawnTime = 0;
+        quizDone = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (lastSpawnTime + timeSpawn < Time.time) 
+        if (lastSpawnTime + timeSpawn < Time.time && !quiz.activeSelf) 
         {
             if (Random.Range(-1f, 1f) < 0) 
             {
@@ -39,9 +44,20 @@ public class gameManager : MonoBehaviour
             }      
             
             lastSpawnTime = Time.time;
-            timeSpawn -= 0.01f;
+        }
+
+        if (buzo.getScore() >= 10 && !quizDone) 
+        {
+            StartCoroutine(aciveQuiz(1f));
+            buzo.movActive = false;
+            quizDone = true;
         }
     }
 
-    
+    public IEnumerator aciveQuiz(float timer) 
+    {
+        yield return new WaitForSeconds(timer);
+        quiz.gameObject.SetActive(true);
+        buzo.movActive = true;
+    }
 }

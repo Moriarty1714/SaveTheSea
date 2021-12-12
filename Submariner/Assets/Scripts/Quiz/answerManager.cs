@@ -5,7 +5,8 @@ using UnityEngine;
 public class answerManager : MonoBehaviour
 {
     public bool isCorrect = false;
-    public quizManager quiz;
+    public GameObject quiz;
+    public buzoMov buzo;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +21,23 @@ public class answerManager : MonoBehaviour
 
     public void Answer() 
     {
+        quiz.GetComponent<quizManager>().isCorrect();
         if (isCorrect)
         {
             Debug.Log("Correct!");
-            quiz.isCorrect();
+            buzo.setScore(10);
         }
         else 
         {
             Debug.Log("Wrong! noob...");
-            quiz.isCorrect();
+            buzo.setScore(-5);
         }
+    }
+
+    IEnumerator endQuiz(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        gameObject.SetActive(false);
     }
 
 }

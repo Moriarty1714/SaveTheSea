@@ -5,6 +5,7 @@ using TMPro;
 
 public class buzoMov : MonoBehaviour
 {
+    Rigidbody2D body;
     [SerializeField] private float velocity = 0;
     public TextMeshProUGUI scoreTxt;
     [SerializeField] private int score = 0;
@@ -14,46 +15,72 @@ public class buzoMov : MonoBehaviour
     public float idleLerpDuration;
     private bool isIdleUp = true;
 
+    public GameObject quiz;
+    public bool movActive = true;
+
     // Start is called before the first frame update
     void Start()
     {
         scoreTxt.text = "SCORE: " + score.ToString();
         idlePosY = transform.position.y;
+
+        body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.UpArrow) && transform.position.y < 2.5f)
+        if (Input.GetKey(KeyCode.UpArrow) && transform.position.y < 3f && movActive && !quiz.activeSelf)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + velocity, transform.position.z);
-            if (transform.rotation.z <= 0.2f)
+            if (transform.rotation.z < 0)
             {
-                transform.Rotate(new Vector3(0, 0, 1), 0.2f);
+                body.velocity = new Vector2(0, (velocity) / 1.25f * Time.deltaTime);
+                transform.Rotate(new Vector3(0, 0, 1), 100f * Time.deltaTime);
+
             }
-        }
-        else if (Input.GetKey(KeyCode.DownArrow) && transform.position.y > -3f)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - velocity, transform.position.z);
-            if (transform.rotation.z >= -0.2f)
+            else
             {
-                transform.Rotate(new Vector3(0, 0, -1), 0.2f);
+                body.velocity = new Vector2(0, velocity * Time.deltaTime);
+                if (transform.rotation.z <= 0.3f)
+                {
+                    transform.Rotate(new Vector3(0, 0, 1), 60f * Time.deltaTime);
+                }
             }
-        }
-        else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
-        {
+
             idlePosY = transform.position.y;
             timeElapsed = 0;
+            isIdleUp = true;
         }
-        else
+        else if (Input.GetKey(KeyCode.DownArrow) && transform.position.y > -3f && movActive && !quiz.activeSelf)
         {
             if (transform.rotation.z > 0)
             {
-                transform.Rotate(new Vector3(0, 0, -1), 0.2f);
+                body.velocity = new Vector2(0, (-velocity) / 1.5f * Time.deltaTime);
+                transform.Rotate(new Vector3(0, 0, -1), 100f * Time.deltaTime);
             }
-            else if (transform.rotation.z < 0)
+            else
             {
-                transform.Rotate(new Vector3(0, 0, 1), 0.2f);
+                body.velocity = new Vector2(0, -velocity * Time.deltaTime);
+                if (transform.rotation.z >= -0.3f)
+                {
+                    transform.Rotate(new Vector3(0, 0, -1), 60f * Time.deltaTime);
+                }
+
+            }
+
+            idlePosY = transform.position.y;
+            timeElapsed = 0;
+            isIdleUp = true;
+        }
+        else
+        {
+            body.velocity = new Vector2(0, 0);
+            if (transform.rotation.z > 0.05f)
+            {
+                transform.Rotate(new Vector3(0, 0, -1), 80f * Time.deltaTime);
+            }
+            else if (transform.rotation.z < -0.05f)
+            {
+                transform.Rotate(new Vector3(0, 0, 1), 80f * Time.deltaTime);
             }
 
             if (isIdleUp)
@@ -62,52 +89,63 @@ public class buzoMov : MonoBehaviour
                 timeElapsed += Time.deltaTime;
 
 
-                if (transform.position.y >= idlePosY + 0.29f) 
+                if (transform.position.y >= idlePosY + 0.29f)
                 {
                     isIdleUp = false;
                     timeElapsed = 0;
                 }
 
             }
-            else 
+            else
             {
                 transform.position = new Vector3(transform.position.x, Mathf.SmoothStep(idlePosY + 0.3f, idlePosY, timeElapsed / idleLerpDuration), transform.position.z);
                 timeElapsed += Time.deltaTime;
 
-                if (transform.position.y <= idlePosY+0.01f)
+                if (transform.position.y <= idlePosY + 0.01f)
                 {
                     isIdleUp = true;
                     timeElapsed = 0;
                 }
             }
-            Debug.Log("PosY: "+ transform.position.y +", IdlePosY: " + idlePosY + ", IsUp?: " + isIdleUp);
-
         }
-
- 
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    
        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Trash(Clone)")
+        if (!quiz.activeSelf)
         {
-            score++;
-            scoreTxt.text = "SCORE: " + score.ToString();
-        }
-        else
-        {
-            if (score > 0){
-                score-=3;
-                if (score < 0)
+            if (collision.gameObject.name == "Trash(Clone)")
+            {
+                setScore(+1);
+            }
+            else
+            {
+                if (score > 0)
                 {
-                    scoreTxt.text = "SCORE: 0";
+                    setScore(-3);
                 }
-                else
-                    scoreTxt.text = "SCORE: " + score.ToString();
             }
         }
-            
 
+    }
+    public int getScore () {
+        return score;
+    }
+    public void setScore(int s)
+    {
+        score += s;
+        if (score < 0)
+        {
+            scoreTxt.text = "PUNTS: 0";
+        }
+        else
+            scoreTxt.text = "PUNTS: " + score.ToString();
     }
 }

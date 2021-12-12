@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &57675853
 RectTransform:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
     - 2050
     - 2030
     CorrectAnswer: 1
-  - Question: "En quants torsos es parteix la majoria del pl\xE0stic present en els
+  - Question: "En quants trosos es parteix la majoria del pl\xE0stic present en els
       nostres oceans?"
     Answers:
     - 1/2 de polzada
@@ -629,7 +629,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCorrect: 0
-  quiz: {fileID: 57675856}
+  quiz: {fileID: 57675852}
+  buzo: {fileID: 1425420547}
 --- !u!1 &426960172
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,8 +849,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1262,7 +1263,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCorrect: 0
-  quiz: {fileID: 57675856}
+  quiz: {fileID: 57675852}
+  buzo: {fileID: 1425420547}
 --- !u!1 &724408859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,7 +1412,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCorrect: 0
-  quiz: {fileID: 57675856}
+  quiz: {fileID: 57675852}
+  buzo: {fileID: 1425420547}
 --- !u!1 &834785820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,7 +1655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastSpawnTime: 0
-  timeSpawn: 1
+  timeSpawn: 0.8
   objScale: {x: 0.02, y: 0.02}
   trash: {fileID: 3503495606885316952, guid: fa91ce6717b4e2647938f12d2278e78e, type: 3}
   nature: {fileID: 8114221634170520997, guid: aa6c2564e7f176745922e3fa3a74b8f5, type: 3}
@@ -1668,6 +1671,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9136ae75b14069a46a2a6c780fee1f39, type: 3}
   - {fileID: 21300000, guid: cd9ad577fb9a31e4e88f274c3e8bd2f9, type: 3}
   - {fileID: 21300000, guid: 79f0287d360695b448355e4735c38320, type: 3}
+  buzo: {fileID: 1425420547}
+  quiz: {fileID: 57675852}
 --- !u!1 &1178847335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,10 +1940,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6113346ea3d9edd4aaa15c42fa940c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 0.02
+  velocity: 200
   scoreTxt: {fileID: 1415955691}
   score: 0
   idleLerpDuration: 0.8
+  quiz: {fileID: 57675852}
+  movActive: 1
 --- !u!4 &1425420548
 Transform:
   m_ObjectHideFlags: 0
@@ -2000,7 +2007,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!1 &1475473757
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,8 +2150,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490830513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52766395, y: -0.43, z: 1}
-  m_LocalScale: {x: 1.2183, y: 1.2183, z: 1.2183}
+  m_LocalPosition: {x: 0.02, y: 0.01, z: 1}
+  m_LocalScale: {x: 1.12, y: 1.12, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1

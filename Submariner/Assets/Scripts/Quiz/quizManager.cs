@@ -21,7 +21,7 @@ public class quizManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     private void GenerateQuestions()
     {
@@ -57,7 +57,16 @@ public class quizManager : MonoBehaviour
                 options[i].GetComponent<Button>().colors = newColorBlock;
             }
         }
-        StartCoroutine(generateNewQuestion(2));
+
+        if (questions.Count == 0)
+        {
+            StartCoroutine(endQuiz(2));
+            Debug.Log("endQuiz");
+        }
+        else 
+        {
+            StartCoroutine(generateNewQuestion(2));
+        }
     }
 
     IEnumerator generateNewQuestion(float timer) 
@@ -74,4 +83,10 @@ public class quizManager : MonoBehaviour
         GenerateQuestions();
     }
 
+    IEnumerator endQuiz(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+
+        gameObject.SetActive(false);
+    }
 }
